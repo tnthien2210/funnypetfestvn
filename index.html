@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sơ Đồ Chi Tiết Triển Lãm Thú Cưng</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle at top, #1a0826 0%, #08020f 60%, #020005 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Khung Poster Chính */
+        .poster-container {
+            width: 100%;
+            max-width: 1100px;
+            background: #0a0414;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(255, 42, 117, 0.25), 0 0 50px rgba(0, 229, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 35px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header Poster */
+        .sponsor-bar {
+            display: flex;
+            gap: 20px;
+            font-size: 0.7rem;
+            color: #8f8f9d;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .event-subtitle {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #ff2a75;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .main-title {
+            font-size: 2.3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, #ffffff 0%, #a2b4ce 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Bảng Chú Thích (Legend) */
+        .legend-bar {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.75rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+
+        /* Map Wrapper */
+        .map-wrapper {
+            width: 100%;
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 25px 18px;
+            background: rgba(13, 6, 26, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Dải Tập Kết Hàng Hóa Trên Cùng */
+        .top-cargo-line {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.65rem;
+            color: #888;
+            margin-bottom: 10px;
+            padding: 0 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ----- VÒM TRIỂN LÃM CHÍNH (DOME HALL) ----- */
+        .dome-hall {
+            width: 100%;
+            border: 2px solid rgba(0, 229, 255, 0.4);
+            border-radius: 140px 140px 30px 30px;
+            padding: 25px 20px 20px 20px;
+            background: rgba(0, 229, 255, 0.02);
+            position: relative;
+            box-shadow: inset 0 0 30px rgba(0, 229, 255, 0.05);
+        }
+
+        .dome-grid-layout {
+            display: grid;
+            grid-template-columns: 2.2fr 1.6fr 2.2fr;
+            gap: 15px;
+            align-items: start;
+        }
+
+        /* Định dạng các ô Gian Hàng */
+        .b-box {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 4px;
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 2px;
+            transition: all 0.2s;
+        }
+
+        .b-box:hover {
+            background: #ff2a75;
+            color: #fff;
+            border-color: #ff2a75;
+            box-shadow: 0 0 10px #ff2a75;
+        }
+
+        /* Khối Gian Hàng Bên Trái */
+        .left-wing {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .grid-2col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; }
+        .grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+        .grid-4col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+        .grid-5col { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+
+        .block-title {
+            font-size: 0.6rem;
+            color: #00e5ff;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+            font-weight: 700;
+        }
+
+        /* KHOANH XANH DƯƠNG: KHU TRÒ CHƠI CHO PET (TRUNG TÂM VÒM) */
+        .pet-playground-center {
+            background: linear-gradient(145deg, #00c6ff 0%, #0072ff 100%);
+            border: 2px solid #00e5ff;
+            border-radius: 16px;
+            padding: 20px 10px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 220px;
+        }
+
+        .pet-playground-center h3 {
+            font-size: 0.95rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #fff;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .pet-playground-center p {
+            font-size: 0.65rem;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 4px 8px;
+            border-radius: 10px;
+            color: #e0f7fa;
+        }
+
+        .pet-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Khối Gian Hàng Bên Phải */
+        .right-wing {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Dãy Gian Hàng Đáy Vòm (31-34, 1-10...) */
+        .dome-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.15);
+        }
+
+        /* ----- KHOANH ĐỎ: SÂN KHẤU KHAI MẠC (BÁN NGUYỆT TRUNG TÂM) ----- */
+        .opening-stage-container {
+            width: 80%;
+            margin: 18px 0;
+            background: linear-gradient(135deg, #ff0055 0%, #ff5e00 100%);
+            border: 2px solid #ff2a75;
+            border-radius: 50px;
+            padding: 16px 20px;
+            text-align: center;
+            box-shadow: 0 0 35px rgba(255, 0, 85, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opening-stage-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .opening-stage-container h2 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .opening-stage-container p {
+            font-size: 0.7rem;
+            color: #ffe6ed;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 3px;
+        }
+
+        /* Dãy Gian Hàng Đai Cam Bao Quanh Sân Khấu (Từ Sơ Đồ 3) */
+        .stage-flank-booths {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+
+        /* ----- PHẦN DƯỚI: 3 TRỤC BẢN ĐỒ ----- */
+        .lower-layout {
+            display: grid;
+            grid-template-columns: 1fr 0.8fr 1fr;
+            gap: 15px;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .food-zone {
+            background: rgba(255, 170, 0, 0.06);
+            border: 1.5px solid rgba(255, 170, 0, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .zone-header-yellow {
+            color: #ffaa00;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .water-feature {
+            background: rgba(0, 229, 255, 0.08);
+            border: 1.5px solid #00e5ff;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            color: #00e5ff;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.2);
+            text-align: center;
+        }
+
+        .common-zone {
+            background: rgba(168, 85, 247, 0.06);
+            border: 1.5px solid rgba(168, 85, 247, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .zone-header-purple {
+            color: #c084fc;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .sub-stage {
+            background: #ff2a75;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 6px;
+            text-align: center;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        /* ----- CỔNG CHÍNH & BÃI ĐẬU XE ----- */
+        .entrance-banner {
+            width: 100%;
+            margin-top: 18px;
+            background: linear-gradient(90deg, #ff2a75, #7928ca);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-weight: 900;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 42, 117, 0.4);
+        }
+
+        .parking-row {
+            display: flex;
+            width: 100%;
+            gap: 15px;
+            margin-top: 12px;
+        }
+
+        .parking-card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            text-align: center;
+            font-size: 0.72rem;
+            color: #a1a1aa;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        /* Footer Poster */
+        .poster-footer {
+            width: 100%;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .qr-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.7rem;
+            color: #a1a1aa;
+        }
+
+        .qr-code {
+            width: 48px;
+            height: 48px;
+            background: #fff;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000;
+            font-weight: 900;
+            font-size: 0.6rem;
+        }
+
+        .event-details {
+            text-align: right;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #ff2a75;
+        }
+    </style>
+</head>
+<body>
+
+<div class="poster-container">
+
+    <!-- Header & Sponsors -->
+    <div class="sponsor-bar">
+    </div>
+    
+    <div class="event-subtitle">FunnyPetFestVN 2026</div>
+    <h1 class="main-title">SƠ ĐỒ CHI TIẾT SỰ KIỆN THÚ CƯNG</h1>
+
+    <!-- Legend Chú Thích -->
+    <div class="legend-bar">
+        <div class="legend-item">
+            <div class="legend-color" style="background: #00e5ff;"></div>
+            <span>Khu Trò Chơi Pet</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff0055;"></div>
+            <span>Sân Khấu Khai Mạc</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: rgba(255,255,255,0.2);"></div>
+            <span>Gian Hàng (1 - 94)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ffaa00;"></div>
+            <span>Khu Ẩm Thực</span>
+        </div>
+    </div>
+
+    <!-- Map Wrapper -->
+    <div class="map-wrapper">
+
+        <div class="top-cargo-line">
+            <span>TẬP KẾT HÀNG HOÁ KHU A</span>
+            <span>TẬP KẾT HÀNG HOÁ KHU B</span>
+        </div>
+
+        <!-- 1. DOME HALL (NHÀ VÒM TRÊN MANG CẤU TRÚC ẢNH 3) -->
+        <div class="dome-hall">
+            <div class="dome-grid-layout">
+
+                <!-- CÁNH TRÁI (GIAN HÀNG 1 - 30, 56 - 61) -->
+                <div class="left-wing">
+                    <span class="block-title">CỤM GIAN HÀNG CÁNH TRÁI</span>
+                    
+                    <div class="grid-3col">
+                        <div class="b-box">57</div>
+                        <div class="b-box">56</div>
+                        <div class="b-box">51</div>
+                    </div>
+
+                    <div class="grid-2col">
+                        <div class="b-box">58</div><div class="b-box">59</div>
+                        <div class="b-box">60</div><div class="b-box">61</div>
+                    </div>
+
+                    <div class="grid-4col">
+                        <div class="b-box">25</div><div class="b-box">26</div>
+                        <div class="b-box">27</div><div class="b-box">28</div>
+                    </div>
+
+                    <div class="grid-4col">
+                        <div class="b-box">15</div><div class="b-box">16</div>
+                        <div class="b-box">17</div><div class="b-box">18</div>
+                    </div>
+
+                    <div class="grid-4col">
+                        <div class="b-box">11</div><div class="b-box">12</div>
+                        <div class="b-box">13</div><div class="b-box">14</div>
+                    </div>
+
+                    <div class="grid-5col">
+                        <div class="b-box">05</div><div class="b-box">06</div>
+                        <div class="b-box">07</div><div class="b-box">08</div>
+                        <div class="b-box">09</div>
+                    </div>
+                </div>
+
+                <!-- KHOANH XANH DƯƠNG: KHU TRÒ CHƠI CHO PET (TRUNG TÂM VÒM) -->
+                <div class="pet-playground-center">
+                    <div class="pet-icon">🐶🐱</div>
+                    <h3>KHU TRÒ CHƠI CHO PET</h3>
+                    <p>PET PLAYGROUND & AGILITY</p>
+
+                    <!-- Các gian hàng nhỏ bao quanh khu chơi theo thiết kế 3 -->
+                    <div class="grid-3col" style="width: 100%; margin-top: 10px;">
+                        <div class="b-box" style="background: rgba(0,0,0,0.3);">53</div>
+                        <div class="b-box" style="background: rgba(0,0,0,0.3);">52</div>
+                        <div class="b-box" style="background: rgba(0,0,0,0.3);">51</div>
+                    </div>
+                    <div class="grid-2col" style="width: 100%;">
+                        <div class="b-box" style="background: rgba(0,0,0,0.3);">50</div>
+                        <div class="b-box" style="background: rgba(0,0,0,0.3);">49</div>
+                    </div>
+                </div>
+
+                <!-- CÁNH PHẢI (GIAN HÀNG 35 - 55, 62 - 94) -->
+                <div class="right-wing">
+                    <span class="block-title">CỤM GIAN HÀNG CÁNH PHẢI</span>
+
+                    <div class="grid-3col">
+                        <div class="b-box">48</div><div class="b-box">47</div><div class="b-box">46</div>
+                    </div>
+
+                    <div class="grid-2col">
+                        <div class="b-box">45</div><div class="b-box">44</div>
+                        <div class="b-box">43</div><div class="b-box">42</div>
+                    </div>
+
+                    <div class="grid-4col">
+                        <div class="b-box">35</div><div class="b-box">36</div>
+                        <div class="b-box">37</div><div class="b-box">38</div>
+                    </div>
+
+                    <div class="grid-4col">
+                        <div class="b-box">78</div><div class="b-box">79</div>
+                        <div class="b-box">80</div><div class="b-box">81</div>
+                    </div>
+
+                    <div class="grid-4col">
+                        <div class="b-box">82</div><div class="b-box">83</div>
+                        <div class="b-box">84</div><div class="b-box">85</div>
+                    </div>
+
+                    <div class="grid-5col">
+                        <div class="b-box">90</div><div class="b-box">91</div>
+                        <div class="b-box">92</div><div class="b-box">93</div>
+                        <div class="b-box">94</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Dãy Gian Hàng Hàng Ngang Đáy Vòm -->
+            <div class="dome-bottom-row">
+                <div style="display: flex; gap: 4px;">
+                    <div class="b-box">01</div><div class="b-box">02</div>
+                    <div class="b-box">03</div><div class="b-box">04</div>
+                </div>
+                <div style="display: flex; gap: 4px;">
+                    <div class="b-box">31</div><div class="b-box">32</div>
+                    <div class="b-box">33</div><div class="b-box">34</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dãy gian hàng bao đai cam phía dưới vòm -->
+        <div class="stage-flank-booths">
+            <div style="display: flex; gap: 4px;">
+                <div class="b-box" style="border-color:#ff5e00;">07</div>
+                <div class="b-box" style="border-color:#ff5e00;">08</div>
+                <div class="b-box" style="border-color:#ff5e00;">09</div>
+                <div class="b-box" style="border-color:#ff5e00;">10</div>
+            </div>
+            <div style="display: flex; gap: 4px;">
+                <div class="b-box" style="border-color:#ff5e00;">14</div>
+                <div class="b-box" style="border-color:#ff5e00;">15</div>
+                <div class="b-box" style="border-color:#ff5e00;">16</div>
+                <div class="b-box" style="border-color:#ff5e00;">17</div>
+                <div class="b-box" style="border-color:#ff5e00;">18</div>
+            </div>
+        </div>
+
+        <!-- 2. KHOANH ĐỎ: SÂN KHẤU KHAI MẠC (MẠNG BÁN NGUYỆT) -->
+        <div class="opening-stage-container">
+            <h2>SÂN KHẤU KHAI MẠC & TRÌNH DIỄN THÚ CƯNG</h2>
+            <p>MAIN STAGE - PET SHOW & OPENING CEREMONY</p>
+        </div>
+
+        <!-- 3. BẢN ĐỒ DƯỚI (3 TRỤC BẮT MẮT) -->
+        <div class="lower-layout">
+
+            <!-- Khu Ẩm Thực -->
+            <div class="food-zone">
+                <div class="zone-header-yellow">KHU ẨM THỰC</div>
+                <div class="grid-2col">
+                    <div class="b-box" style="background: rgba(255,170,0,0.15);">F1-PET CAFE</div>
+                    <div class="b-box" style="background: rgba(255,170,0,0.15);">F2-SNACKS</div>
+                    <div class="b-box" style="background: rgba(255,170,0,0.15);">F3-DRINKS</div>
+                    <div class="b-box" style="background: rgba(255,170,0,0.15);">F4-FASTFOOD</div>
+                </div>
+            </div>
+
+            <!-- Hồ Nước -->
+            <div class="water-feature">
+                <div>💧 HỒ NƯỚC 💧</div>
+                <span style="font-size:0.6rem; font-weight:500; opacity:0.8; margin-top:4px;">WATER POOL ZONE</span>
+            </div>
+
+            <!-- Khu Không Gian Chung & Sân Khấu Phụ -->
+            <div class="common-zone">
+                <div class="zone-header-purple">KHU KHÔNG GIAN CHUNG</div>
+                <div class="grid-2col">
+                    <div class="b-box">K1-CHECKUP</div>
+                    <div class="b-box">K2-SPA</div>
+                </div>
+                <div class="sub-stage">SÂN KHẤU PHỤ / WORKSHOP</div>
+            </div>
+
+        </div>
+
+        <!-- 4. CỔNG CHÍNH VÀ BÃI ĐẬU XE -->
+        <div class="entrance-banner">
+            ▼ CỔNG CHÍNH (MAIN ENTRANCE) ▼
+        </div>
+
+        <div class="parking-row">
+            <div class="parking-card">🚗 BÃI ĐẬU Ô TÔ (CAR PARKING)</div>
+            <div class="parking-card">🛵 BÃI ĐẬU XE MÁY (MOTORBIKE PARKING)</div>
+        </div>
+</body>
+</html>
